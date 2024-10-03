@@ -358,7 +358,7 @@ class LUC_AVLTree {
          *      - LRRotation,
          *      - RLRotation.
          * You can also look at the method InsertElement
-         *
+         */
 
         if(node.value == value) { //checks value of node
             if (node.rightChild == null && node.leftChild == null) {
@@ -381,7 +381,7 @@ class LUC_AVLTree {
         } else {
             deleteElement(value, node.rightChild);
         }
-*/
+
         return node;
     }
 
