@@ -343,6 +343,9 @@ class LUC_AVLTree {
 
     private Node deleteElement(int value, Node node) {
 
+        if(node == null){
+            return null;
+        }
         /*
          * NOTE, that you should use the existing coded private methods
          * in this file, which include:
@@ -357,23 +360,24 @@ class LUC_AVLTree {
          * You can also look at the method InsertElement
          *
 
-        if(node.value == value){ //checks value of node
-            if(node.rightChild == null && node.leftChild == null){
-                node = null;
+        if(node.value == value) { //checks value of node
+            if (node.rightChild == null && node.leftChild == null) {
+                return null; //deletes if leaf node
             }
-
-            if(node.leftChild == null){
-                int bf = getBalanceFactor(node);
-                if(Math.abs(bf) > 1){
-                    //TODO
-                }
+            if (node.rightChild == null) {
+                return node.leftChild; //deletes if no right child
             }
-            return null;
+            if (node.leftChild == null) {
+                return node.rightChild; //deletes if no left child
+            }
+            Node temp = minValueNode(node);
+            deleteElement(minValueNode(node).value, minValueNode(node));
+            node = temp;
+            return node;
         }
 
         if(node.value > value){ //uses recursion to find node
             deleteElement(value, node.leftChild);
-            //TODO: balance tree after deletion
         } else {
             deleteElement(value, node.rightChild);
         }
